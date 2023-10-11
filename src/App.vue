@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
+import SearchInput from './components/SearchInput.vue'
 
-const weatherLocation = ref('')
 const currentWeatherData = ref({
   location: '',
   temp_c: '',
@@ -11,9 +11,9 @@ const currentWeatherData = ref({
   icon: ''
 })
 
-function getWeatherData() {
+function getWeatherData(weatherLocation: string) {
   fetch(
-    `http://api.weatherapi.com/v1/current.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation.value}`
+    `http://api.weatherapi.com/v1/current.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}`
   )
     .then((response) => {
       return response.json()
@@ -33,8 +33,7 @@ function getWeatherData() {
 </script>
 
 <template>
-  <input type="text" v-model="weatherLocation" class="border" />
-  <button @click="getWeatherData">Search</button>
+  <SearchInput @get-weather-data="getWeatherData" />
   <CurrentWeatherCard
     :current-weather-data="currentWeatherData"
     v-if="currentWeatherData.location !== ''"
