@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const weatherLocation = ref('')
-const weatherData = ref()
+const currentWeatherData = ref()
 
 function getWeatherData() {
   fetch(
@@ -11,12 +11,12 @@ function getWeatherData() {
     .then((response) => {
       return response.json()
     })
-    .then((response) => (weatherData.value = response))
+    .then((response) => (currentWeatherData.value = response))
 }
 </script>
 
 <template>
   <input type="text" v-model="weatherLocation" class="border" />
   <button @click="getWeatherData">Search</button>
-  <p>{{ weatherData }}</p>
+  <p>{{ currentWeatherData }}</p>
 </template>
