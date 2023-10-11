@@ -26,6 +26,9 @@ function getWeatherData() {
         icon: response.current.condition.icon
       }
     })
+    .catch(() => {
+      alert('Location not found. Try again.')
+    })
 }
 </script>
 
