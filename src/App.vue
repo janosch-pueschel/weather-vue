@@ -35,5 +35,8 @@ function getWeatherData() {
 <template>
   <input type="text" v-model="weatherLocation" class="border" />
   <button @click="getWeatherData">Search</button>
-  <CurrentWeatherCard :current-weather-data="currentWeatherData" />
+  <CurrentWeatherCard
+    :current-weather-data="currentWeatherData"
+    v-if="currentWeatherData.location !== ''"
+  />
 </template>
