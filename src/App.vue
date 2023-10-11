@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
+
 const weatherLocation = ref('')
-const currentWeatherData = ref()
+const currentWeatherData = ref({
+  location: '',
+  temp_c: '',
+  temp_f: '',
+  icon: ''
+})
 
 function getWeatherData() {
   fetch(
@@ -11,12 +18,19 @@ function getWeatherData() {
     .then((response) => {
       return response.json()
     })
-    .then((response) => (currentWeatherData.value = response))
+    .then((response) => {
+      currentWeatherData.value = {
+        location: response.location.name,
+        temp_c: response.current.temp_c,
+        temp_f: response.current.temp_f,
+        icon: response.current.condition.icon
+      }
+    })
 }
 </script>
 
 <template>
   <input type="text" v-model="weatherLocation" class="border" />
   <button @click="getWeatherData">Search</button>
-  <p>{{ currentWeatherData }}</p>
+  <CurrentWeatherCard :current-weather-data="currentWeatherData" />
 </template>
