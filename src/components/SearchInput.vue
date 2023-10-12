@@ -5,12 +5,12 @@ const weatherLocation = ref('')
 </script>
 
 <template>
-  <div class="form-control">
-    <div class="input-group">
+  <div class="form-control flex items-center">
+    <div class="input-group w-11/12">
       <input
         type="text"
         placeholder="Search…"
-        class="input input-bordered"
+        class="input input-bordered w-full"
         v-model="weatherLocation"
         @keydown.enter="$emit('getWeatherData', weatherLocation)"
       />
