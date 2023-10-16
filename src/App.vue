@@ -29,11 +29,41 @@ function getWeatherData(weatherLocation: string) {
     .catch(() => {
       alert('Location not found. Try again.')
     })
+  locationSearchResults.value = []
+}
+
+interface Location {
+  name: string
+  region: string
+  country: string
+}
+const locationSearchResults = ref<Location[]>([])
+
+function searchWeatherLocation(weatherLocation: string) {
+  fetch(
+    `http://api.weatherapi.com/v1/search.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}`
+  )
+    .then((response) => {
+      return response.json()
+    })
+    .then((response) => {
+      locationSearchResults.value = response.map((item: any) => ({
+        location: `${item.name}, ${item.country}`,
+        coordinates: `${item.lat},${item.lon}`
+      }))
+    })
+    .catch(() => {
+      return
+    })
 }
 </script>
 
 <template>
-  <SearchInput @get-weather-data="getWeatherData" />
+  <SearchInput
+    @get-weather-data="getWeatherData"
+    @search-weather-location="searchWeatherLocation"
+    :location-search-results="locationSearchResults"
+  />
   <CurrentWeatherCard
     :current-weather-data="currentWeatherData"
     v-if="currentWeatherData.location !== ''"
