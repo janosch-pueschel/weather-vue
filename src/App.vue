@@ -8,12 +8,17 @@ const currentWeatherData = ref({
   location: '',
   temp_c: '',
   temp_f: '',
-  icon: ''
+  icon: '',
+  forecast: [
+    { date: '', temp_c: '', temp_f: '', icon: '' },
+    { date: '', temp_c: '', temp_f: '', icon: '' },
+    { date: '', temp_c: '', temp_f: '', icon: '' }
+  ]
 })
 
 function getWeatherData(weatherLocation: string) {
   fetch(
-    `http://api.weatherapi.com/v1/current.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}`
+    `http://api.weatherapi.com/v1/forecast.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}&days=3`
   )
     .then((response) => {
       return response.json()
@@ -23,8 +28,29 @@ function getWeatherData(weatherLocation: string) {
         location: response.location.name,
         temp_c: response.current.temp_c,
         temp_f: response.current.temp_f,
-        icon: response.current.condition.icon
+        icon: response.current.condition.icon,
+        forecast: [
+          {
+            date: response.forecast.forecastday[0].date,
+            temp_c: response.forecast.forecastday[0].day.maxtemp_c,
+            temp_f: response.forecast.forecastday[0].day.maxtemp_f,
+            icon: response.forecast.forecastday[0].day.condition.icon
+          },
+          {
+            date: response.forecast.forecastday[1].date,
+            temp_c: response.forecast.forecastday[1].day.maxtemp_c,
+            temp_f: response.forecast.forecastday[1].day.maxtemp_f,
+            icon: response.forecast.forecastday[1].day.condition.icon
+          },
+          {
+            date: response.forecast.forecastday[2].date,
+            temp_c: response.forecast.forecastday[2].day.maxtemp_c,
+            temp_f: response.forecast.forecastday[2].day.maxtemp_f,
+            icon: response.forecast.forecastday[2].day.condition.icon
+          }
+        ]
       }
+      console.log(currentWeatherData.value)
     })
     .catch(() => {
       alert('Location not found. Try again.')
