@@ -33,8 +33,9 @@ function getWeatherData(weatherLocation: string) {
         temp_c: response.current.temp_c,
         temp_f: response.current.temp_f,
         icon: response.current.condition.icon,
-        forecast: response.forecast.forecastday.map((item) => {
+        forecast: response.forecast.forecastday.map((item, index: number) => {
           return {
+            key: index,
             date: item.date,
             temp_c: item.day.maxtemp_c,
             temp_f: item.day.maxtemp_f,

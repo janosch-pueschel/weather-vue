@@ -3,7 +3,7 @@ defineProps(['weatherForecast'])
 </script>
 
 <template>
-    <div v-for="weather in weatherForecast">
+g    <div v-for="weather in weatherForecast" :key="weather.index">
         <p>{{ weather.date }}</p>
         <p>{{ weather.temp_c }}</p>
         <p>{{ weather.temp_f}}</p>
