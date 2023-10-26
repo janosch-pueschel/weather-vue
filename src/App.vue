@@ -4,17 +4,21 @@ import { ref } from 'vue'
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
 
+interface WeatherForecast {
+  date: string
+  temp_c: string
+  temp_f: string
+  icon: string
+}
+
 const currentWeatherData = ref({
   location: '',
   temp_c: '',
   temp_f: '',
   icon: '',
-  forecast: [
-    { date: '', temp_c: '', temp_f: '', icon: '' },
-    { date: '', temp_c: '', temp_f: '', icon: '' },
-    { date: '', temp_c: '', temp_f: '', icon: '' }
-  ]
+  forecast: <WeatherForecast[]>[]
 })
+
 
 function getWeatherData(weatherLocation: string) {
   fetch(
@@ -29,28 +33,15 @@ function getWeatherData(weatherLocation: string) {
         temp_c: response.current.temp_c,
         temp_f: response.current.temp_f,
         icon: response.current.condition.icon,
-        forecast: [
-          {
-            date: response.forecast.forecastday[0].date,
-            temp_c: response.forecast.forecastday[0].day.maxtemp_c,
-            temp_f: response.forecast.forecastday[0].day.maxtemp_f,
-            icon: response.forecast.forecastday[0].day.condition.icon
-          },
-          {
-            date: response.forecast.forecastday[1].date,
-            temp_c: response.forecast.forecastday[1].day.maxtemp_c,
-            temp_f: response.forecast.forecastday[1].day.maxtemp_f,
-            icon: response.forecast.forecastday[1].day.condition.icon
-          },
-          {
-            date: response.forecast.forecastday[2].date,
-            temp_c: response.forecast.forecastday[2].day.maxtemp_c,
-            temp_f: response.forecast.forecastday[2].day.maxtemp_f,
-            icon: response.forecast.forecastday[2].day.condition.icon
+        forecast: response.forecast.forecastday.map((item) => {
+          return {
+            date: item.date,
+            temp_c: item.day.maxtemp_c,
+            temp_f: item.day.maxtemp_f,
+            icon: item.day.condition.icon
           }
-        ]
+        })
       }
-      console.log(currentWeatherData.value)
     })
     .catch(() => {
       alert('Location not found. Try again.')
