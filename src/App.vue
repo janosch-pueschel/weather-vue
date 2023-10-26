@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
+import WeatherForecastTable from './components/WeatherForecastTable.vue'
 
 interface WeatherForecast {
   date: string
@@ -18,7 +19,6 @@ const currentWeatherData = ref({
   icon: '',
   forecast: <WeatherForecast[]>[]
 })
-
 
 function getWeatherData(weatherLocation: string) {
   fetch(
@@ -85,4 +85,5 @@ function searchWeatherLocation(weatherLocation: string) {
     :current-weather-data="currentWeatherData"
     v-if="currentWeatherData.location !== ''"
   />
+  <WeatherForecastTable :weather-forecast="currentWeatherData.forecast"/>
 </template>
