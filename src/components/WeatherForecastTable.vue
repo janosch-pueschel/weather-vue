@@ -12,7 +12,11 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
     </div>
     <div class="flex justify-center items-center">
       <span class="mr-1">{{
-        temperatureUnitCelsius ? `${weather.temp_c} °C` : `${weather.temp_f} °F`
+        temperatureUnitCelsius ? `${weather.mintemp_c}°` : `${weather.mintemp_f}°`
+      }}</span>
+      -
+      <span class="mr-1">{{
+        temperatureUnitCelsius ? `${weather.maxtemp_c}°` : `${weather.maxtemp_f}°`
       }}</span>
     </div>
   </div>
