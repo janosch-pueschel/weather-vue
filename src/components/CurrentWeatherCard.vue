@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import UnitToggle from './UnitToggle.vue'
+/* import UnitToggle from './UnitToggle.vue' */
 
-defineProps(['currentWeatherData'])
+defineProps(['currentWeatherData', 'temperatureUnitCelsius'])
 </script>
 
 <template>
@@ -9,7 +9,10 @@ defineProps(['currentWeatherData'])
     <img src="//cdn.weatherapi.com/weather/64x64/day/113.png" />
     <h1>{{ currentWeatherData.location }}</h1>
     <div>
-      <UnitToggle :current-weather-data="currentWeatherData" />
+      <!-- <UnitToggle :current-weather-data="currentWeatherData" /> -->
+      <span class="mr-1">{{
+        temperatureUnitCelsius ? `${currentWeatherData.temp_c} °C`: `${currentWeatherData.temp_f} °F`
+      }}</span>
     </div>
   </div>
 </template>

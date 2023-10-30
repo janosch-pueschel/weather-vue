@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
+import UnitToggle from './components/UnitToggle.vue'
 import WeatherForecastTable from './components/WeatherForecastTable.vue'
 
 interface WeatherForecast {
@@ -74,6 +75,11 @@ function searchWeatherLocation(weatherLocation: string) {
       return
     })
 }
+
+const temperatureUnitCelsius = ref(true)
+function toggleTemperatureUnit() {
+  temperatureUnitCelsius.value = !temperatureUnitCelsius.value
+}
 </script>
 
 <template>
@@ -84,7 +90,15 @@ function searchWeatherLocation(weatherLocation: string) {
   />
   <CurrentWeatherCard
     :current-weather-data="currentWeatherData"
+    :temperature-unit-celsius="temperatureUnitCelsius"
     v-if="currentWeatherData.location !== ''"
   />
-  <WeatherForecastTable :weather-forecast="currentWeatherData.forecast"/>
+  <WeatherForecastTable
+    :weather-forecast="currentWeatherData.forecast"
+    :temperature-unit-celsius="temperatureUnitCelsius"
+  />
+  <UnitToggle
+    :temperature-unit="temperatureUnitCelsius"
+    @toggle-temperature-unit="toggleTemperatureUnit"
+  />
 </template>

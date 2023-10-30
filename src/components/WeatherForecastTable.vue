@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps(['weatherForecast'])
+defineProps(['weatherForecast', 'temperatureUnitCelsius'])
 </script>
 
 <template>
@@ -8,11 +8,12 @@ defineProps(['weatherForecast'])
       <p>{{ weather.date }}</p>
     </div>
     <div class="flex justify-center items-center">
-      <img :src="weather.icon">
+      <img :src="weather.icon" />
     </div>
     <div class="flex justify-center items-center">
-      <p>{{ weather.temp_c }} °C</p>
-      <p>{{ weather.temp_f }} °F</p>
+      <span class="mr-1">{{
+        temperatureUnitCelsius ? `${weather.temp_c} °C` : `${weather.temp_f} °F`
+      }}</span>
     </div>
   </div>
 </template>
