@@ -9,10 +9,10 @@ import WeatherForecastTable from './components/WeatherForecastTable.vue'
 interface WeatherForecast {
   date: string
   weekday: string
-  temp_c: number
+  avgtemp_c: number
   maxtemp_c: number
   mintemp_c: number
-  temp_f: number
+  avgtemp_f: number
   maxtemp_f: number
   mintemp_f: number
   icon: string
@@ -44,14 +44,17 @@ function getWeatherData(weatherLocation: string) {
             key: index,
             date: item.date,
             weekday: getDayOfWeek(item.date),
+            avgtemp_c: item.day.avgtemp_c,
             maxtemp_c: Math.round(item.day.maxtemp_c),
             mintemp_c: Math.round(item.day.mintemp_c),
+            avgtemp_f: item.day.avgtemp_f,
             maxtemp_f: Math.round(item.day.maxtemp_f),
             mintemp_f: Math.round(item.day.mintemp_f),
             icon: item.day.condition.icon
           }
         })
       }
+      console.log(response)
     })
     .catch(() => {
       alert('Location not found. Try again.')
