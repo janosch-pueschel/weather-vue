@@ -5,7 +5,7 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
 <template>
   <div v-for="weather in weatherForecast" :key="weather.index" class="grid grid-cols-3">
     <div class="flex justify-center items-center">
-      <p>{{ weather.date }}</p>
+      <p>{{ weather.weekday }}</p>
     </div>
     <div class="flex justify-center items-center">
       <img :src="weather.icon" />

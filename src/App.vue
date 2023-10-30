@@ -8,6 +8,7 @@ import WeatherForecastTable from './components/WeatherForecastTable.vue'
 
 interface WeatherForecast {
   date: string
+  weekday: string
   temp_c: string
   temp_f: string
   icon: string
@@ -23,7 +24,7 @@ const currentWeatherData = ref({
 
 function getWeatherData(weatherLocation: string) {
   fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}&days=3`
+    `http://api.weatherapi.com/v1/forecast.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}&days=3 `
   )
     .then((response) => {
       return response.json()
@@ -38,6 +39,7 @@ function getWeatherData(weatherLocation: string) {
           return {
             key: index,
             date: item.date,
+            weekday: getDayOfWeek(item.date),
             temp_c: item.day.maxtemp_c,
             temp_f: item.day.maxtemp_f,
             icon: item.day.condition.icon
@@ -49,6 +51,12 @@ function getWeatherData(weatherLocation: string) {
       alert('Location not found. Try again.')
     })
   locationSearchResults.value = []
+}
+
+function getDayOfWeek(date: string) {
+  const dayOfWeek = new Date(date).toLocaleString('en-us', { weekday: 'short' })
+  const today = new Date().toLocaleString('en-us', { weekday: 'short' })
+  return dayOfWeek === today ? "Today" : dayOfWeek
 }
 
 interface Location {
