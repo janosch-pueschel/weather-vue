@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import WeatherBar from './WeatherBar.vue'
+
 defineProps(['weatherForecast', 'temperatureUnitCelsius'])
 </script>
 
@@ -14,7 +16,7 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
       <span class="mr-1">{{
         temperatureUnitCelsius ? `${weather.mintemp_c}°` : `${weather.mintemp_f}°`
       }}</span>
-      -
+      <WeatherBar :weather="weather" :temperature-unit-celsius="temperatureUnitCelsius"/>
       <span class="mr-1">{{
         temperatureUnitCelsius ? `${weather.maxtemp_c}°` : `${weather.maxtemp_f}°`
       }}</span>
