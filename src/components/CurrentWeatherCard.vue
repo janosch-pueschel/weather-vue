@@ -6,15 +6,12 @@ defineProps(['currentWeatherData', 'temperatureUnitCelsius'])
 
 <template>
   <div class="flex flex-col items-center py-5">
-    <img :src="currentWeatherData.icon" />
-    <h1>{{ currentWeatherData.location }}</h1>
+    <p class="text-lg">{{ currentWeatherData.location }}</p>
     <div>
       <!-- <UnitToggle :current-weather-data="currentWeatherData" /> -->
-      <span class="mr-1">{{
-        temperatureUnitCelsius
-          ? `${currentWeatherData.temp_c} °C`
-          : `${currentWeatherData.temp_f} °F`
-      }}</span>
+      <span class="text-6xl"
+        >{{ temperatureUnitCelsius ? currentWeatherData.temp_c : currentWeatherData.temp_f }}°</span
+      >
     </div>
   </div>
 </template>
