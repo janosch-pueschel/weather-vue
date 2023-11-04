@@ -5,7 +5,6 @@ import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
 import UnitToggle from './components/UnitToggle.vue'
 import WeatherForecastTable from './components/WeatherForecastTable.vue'
-import { count } from 'console'
 
 interface WeatherForecast {
   date: string
