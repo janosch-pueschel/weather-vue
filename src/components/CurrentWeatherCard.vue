@@ -1,16 +1,16 @@
 <script setup lang="ts">
 /* import UnitToggle from './UnitToggle.vue' */
 
-defineProps(['currentWeatherData', 'temperatureUnitCelsius'])
+defineProps(['weatherData', 'temperatureUnitCelsius'])
 </script>
 
 <template>
   <div class="flex flex-col items-center py-5">
-    <p class="text-lg">{{ currentWeatherData.location }}</p>
+    <p class="text-lg">{{ weatherData.location }}</p>
     <div>
-      <!-- <UnitToggle :current-weather-data="currentWeatherData" /> -->
+      <!-- <UnitToggle :current-weather-data="weatherData" /> -->
       <span class="text-6xl"
-        >{{ temperatureUnitCelsius ? currentWeatherData.temp_c : currentWeatherData.temp_f }}°</span
+        >{{ temperatureUnitCelsius ? weatherData.temp_c : weatherData.temp_f }}°</span
       >
     </div>
   </div>

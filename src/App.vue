@@ -19,7 +19,7 @@ interface WeatherForecast {
   icon: string
 }
 
-const currentWeatherData = ref({
+const weatherData = ref({
   location: '',
   country: '',
   temp_c: '',
@@ -45,7 +45,7 @@ function getWeatherData(weatherLocation: string) {
       const { name, country } = response.location
       const { temp_c, temp_f, feelslike_c, feelslike_f, wind_kph, wind_mph, precip_mm, precip_in } =
         response.current
-      currentWeatherData.value = {
+      weatherData.value = {
         location: name,
         country: country,
         temp_c: temp_c,
@@ -124,12 +124,12 @@ function toggleTemperatureUnit() {
     :location-search-results="locationSearchResults"
   />
   <CurrentWeatherCard
-    :current-weather-data="currentWeatherData"
+    :weather-data="weatherData"
     :temperature-unit-celsius="temperatureUnitCelsius"
-    v-if="currentWeatherData.location !== ''"
+    v-if="weatherData.location !== ''"
   />
   <WeatherForecastTable
-    :weather-forecast="currentWeatherData.forecast"
+    :weather-forecast="weatherData.forecast"
     :temperature-unit-celsius="temperatureUnitCelsius"
   />
   <UnitToggle
