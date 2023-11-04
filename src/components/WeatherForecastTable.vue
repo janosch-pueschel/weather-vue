@@ -18,7 +18,7 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
         <img :src="weather.icon" class="w-10" />
       </div>
       <div class="flex justify-between items-center">
-        <div class="w-20 border-red-500 border-2">
+        <div class="w-20">
           <p>
             {{ temperatureUnitCelsius ? `${weather.mintemp_c}°` : `${weather.mintemp_f}°` }}
           </p>
@@ -28,7 +28,7 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
           :temperature-unit-celsius="temperatureUnitCelsius"
           class="w-full"
         />
-        <div class="w-20 border-red-500 border-2 text-right">
+        <div class="w-20 text-right">
           {{ temperatureUnitCelsius ? `${weather.maxtemp_c}°` : `${weather.maxtemp_f}°` }}
         </div>
       </div>
