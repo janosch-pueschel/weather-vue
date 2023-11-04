@@ -5,6 +5,7 @@ import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
 import UnitToggle from './components/UnitToggle.vue'
 import WeatherForecastTable from './components/WeatherForecastTable.vue'
+import { count } from 'console'
 
 interface WeatherForecast {
   date: string
@@ -20,9 +21,16 @@ interface WeatherForecast {
 
 const currentWeatherData = ref({
   location: '',
+  country: '',
   temp_c: '',
   temp_f: '',
-  icon: '',
+  feelslike_c: '',
+  feelslike_f: '',
+  condition: '',
+  wind_kph: '',
+  wind_mph: '',
+  precip_mm: '',
+  precip_in: '',
   forecast: <WeatherForecast[]>[]
 })
 
@@ -34,11 +42,21 @@ function getWeatherData(weatherLocation: string) {
       return response.json()
     })
     .then((response) => {
+      const { name, country } = response.location
+      const { temp_c, temp_f, feelslike_c, feelslike_f, wind_kph, wind_mph, precip_mm, precip_in } =
+        response.current
       currentWeatherData.value = {
-        location: response.location.name,
-        temp_c: response.current.temp_c,
-        temp_f: response.current.temp_f,
-        icon: response.current.condition.icon,
+        location: name,
+        country: country,
+        temp_c: temp_c,
+        temp_f: temp_f,
+        feelslike_c: feelslike_c,
+        feelslike_f: feelslike_f,
+        condition: response.current.condition.text,
+        wind_kph: wind_kph,
+        wind_mph: wind_mph,
+        precip_mm: precip_mm,
+        precip_in: precip_in,
         forecast: response.forecast.forecastday.map((item, index: number) => {
           return {
             key: index,
