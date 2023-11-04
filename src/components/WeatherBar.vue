@@ -39,7 +39,7 @@ const tempColorGradient = (minTemp: number, maxTemp: number) => {
 
 <template>
   <div
-    class="h-2 w-20 pr-2 rounded"
+    class="h-2 pr-2 rounded"
     :style="{
       backgroundImage: tempColorGradient(props.weather.mintemp_c, props.weather.maxtemp_c)
     }"
