@@ -5,7 +5,6 @@ const tempMarkerPosition = (minTemp: number, maxTemp: number, avgTemp: number) =
   const totalTempRange = maxTemp - minTemp
   const averageTempRange = avgTemp - minTemp
   const tempMarkerPosition = (100 / totalTempRange) * averageTempRange + '%'
-  console.log(tempMarkerPosition)
   return tempMarkerPosition
 }
 

@@ -71,7 +71,6 @@ function getWeatherData(weatherLocation: string) {
           }
         })
       }
-      console.log(response)
     })
     .catch(() => {
       alert('Location not found. Try again.')
