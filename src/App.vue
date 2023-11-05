@@ -129,9 +129,13 @@ function toggleTemperatureUnit() {
   <WeatherForecastTable
     :weather-forecast="weatherData.forecast"
     :temperature-unit-celsius="temperatureUnitCelsius"
-  />
-  <UnitToggle
-    :temperature-unit="temperatureUnitCelsius"
-    @toggle-temperature-unit="toggleTemperatureUnit"
-  />
+  /> 
+  <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
+    <div class="w-11/12">
+      <UnitToggle
+        :temperature-unit="temperatureUnitCelsius"
+        @toggle-temperature-unit="toggleTemperatureUnit"
+      />
+    </div>
+  </footer>
 </template>
