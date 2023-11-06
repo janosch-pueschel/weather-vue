@@ -16,11 +16,11 @@ function setWeatherLocation(location: string) {
 </script>
 
 <template>
-  <div class="form-control flex items-center">
-    <div class="input-group w-11/12">
+  <div class="w-full form-control flex items-center">
+    <div class="w-11/12 input-group">
       <input
         type="text"
-        placeholder="Search…"
+        placeholder="Search Location..."
         class="input input-bordered w-full"
         v-model="weatherLocation"
         @keydown.enter="
