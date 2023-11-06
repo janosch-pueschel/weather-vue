@@ -13,70 +13,83 @@ function setWeatherLocation(location: string) {
   userInput = weatherLocation.value
   weatherLocation.value = location
 }
+
+const showModal = ref(false)
 </script>
 
 <template>
-  <div class="w-full form-control flex items-center">
-    <div class="w-11/12 input-group">
-      <input
-        type="text"
-        placeholder="Search Location..."
-        class="input input-bordered w-full"
-        v-model="weatherLocation"
-        @keydown.enter="
-          () => {
-            $emit('getWeatherData', weatherLocation)
-            clearWeatherLocation()
-          }
-        "
-        @keydown="$emit('searchWeatherLocation', weatherLocation)"
-      />
-      <button
-        class="btn btn-square"
-        @click="
-          () => {
-            $emit('getWeatherData', weatherLocation)
-            clearWeatherLocation()
-          }
-        "
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      </button>
-    </div>
+  <div>
     <div
-      class="absolute top-14 py-2 w-11/12 z-20 h-full bg-base-100"
-      :class="{ hidden: locationSearchResults.length === 0 }"
-    >
-      <ul>
-        <li
-          v-for="result in locationSearchResults"
-          :key="result.coordinates"
-          class="px-4 py-3 hover:cursor-pointer hover:bg-gray-800"
-          @click="
+      class="bg-base-300 bg-opacity-90 h-screen w-screen z-10 fixed"
+      :class="{ block: showModal, hidden: !showModal }"
+      @click="showModal = !showModal"
+    ></div>
+    <div class="w-full py-7 form-control flex items-center">
+      <div class="w-11/12 join z-20">
+        <input
+          type="text"
+          placeholder="Search Location..."
+          class="input border-gray-600 join-item w-full"
+          v-model="weatherLocation"
+          @keydown.enter="
             () => {
-              $emit('getWeatherData', result.coordinates)
+              $emit('getWeatherData', weatherLocation)
               clearWeatherLocation()
+              showModal = !showModal
             }
           "
-          @mouseover="setWeatherLocation(result.location)"
-          @mouseleave="setWeatherLocation(userInput)"
+          @keydown="$emit('searchWeatherLocation', weatherLocation)"
+          @click="showModal ? '' : (showModal = !showModal)"
+        />
+        <button
+          class="btn border-gray-600 join-item"
+          @click="
+            () => {
+              $emit('getWeatherData', weatherLocation)
+              clearWeatherLocation()
+              showModal ? (showModal = !showModal) : ''
+            }
+          "
         >
-          {{ result.location }}
-        </li>
-      </ul>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="absolute top-20 py-2 w-11/12 z-20"
+        :class="{ hidden: locationSearchResults.length === 0 }"
+      >
+        <ul>
+          <li
+            v-for="result in locationSearchResults"
+            :key="result.coordinates"
+            class="px-4 py-3 hover:cursor-pointer"
+            @click="
+              () => {
+                $emit('getWeatherData', result.coordinates)
+                clearWeatherLocation()
+                showModal = !showModal
+              }
+            "
+            @mouseover="setWeatherLocation(result.location)"
+            @mouseleave="setWeatherLocation(userInput)"
+          >
+            {{ result.location }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

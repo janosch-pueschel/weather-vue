@@ -116,9 +116,7 @@ function toggleTemperatureUnit() {
 </script>
 
 <template>
-  <header
-    class="w-full py-7 flex justify-center items-center bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800"
-  >
+  <header class="bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800">
     <SearchInput
       @get-weather-data="getWeatherData"
       @search-weather-location="searchWeatherLocation"
