@@ -5,7 +5,7 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
 </script>
 
 <template>
-  <div class="flex justify-center">
+  <section class="flex justify-center">
     <div class="w-11/12 my-8 p-3 bg-white bg-opacity-10 rounded-lg">
       <div
         v-for="weather in weatherForecast"
@@ -35,5 +35,5 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius'])
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
