@@ -117,7 +117,7 @@ function toggleTemperatureUnit() {
 
 <template>
   <header
-    class="w-full py-5 flex justify-center items-center bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800"
+    class="w-full py-7 flex justify-center items-center bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800"
   >
     <SearchInput
       @get-weather-data="getWeatherData"
@@ -125,15 +125,15 @@ function toggleTemperatureUnit() {
       :location-search-results="locationSearchResults"
     />
   </header>
-    <CurrentWeatherCard
-      :weather-data="weatherData"
-      :temperature-unit-celsius="temperatureUnitCelsius"
-      v-if="weatherData.location !== ''"
-    />
-    <WeatherForecastTable
-      :weather-forecast="weatherData.forecast"
-      :temperature-unit-celsius="temperatureUnitCelsius"
-    /> 
+  <CurrentWeatherCard
+    :weather-data="weatherData"
+    :temperature-unit-celsius="temperatureUnitCelsius"
+    v-if="weatherData.location !== ''"
+  />
+  <WeatherForecastTable
+    :weather-forecast="weatherData.forecast"
+    :temperature-unit-celsius="temperatureUnitCelsius"
+  /> 
   <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
     <div class="w-11/12">
       <UnitToggle
