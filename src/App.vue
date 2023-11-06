@@ -125,15 +125,17 @@ function toggleTemperatureUnit() {
       :location-search-results="locationSearchResults"
     />
   </header>
-  <CurrentWeatherCard
-    :weather-data="weatherData"
-    :temperature-unit-celsius="temperatureUnitCelsius"
-    v-if="weatherData.location !== ''"
-  />
-  <WeatherForecastTable
-    :weather-forecast="weatherData.forecast"
-    :temperature-unit-celsius="temperatureUnitCelsius"
-  /> 
+  <main>
+    <CurrentWeatherCard
+      :weather-data="weatherData"
+      :temperature-unit-celsius="temperatureUnitCelsius"
+      v-if="weatherData.location !== ''"
+    />
+    <WeatherForecastTable
+      :weather-forecast="weatherData.forecast"
+      :temperature-unit-celsius="temperatureUnitCelsius"
+    /> 
+  </main>
   <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
     <div class="w-11/12">
       <UnitToggle
