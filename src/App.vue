@@ -114,17 +114,25 @@ const temperatureUnitCelsius = ref(true)
 function toggleTemperatureUnit() {
   temperatureUnitCelsius.value = !temperatureUnitCelsius.value
 }
+
+const darkMode = ref(false)
+function toggleTheme() {
+  darkMode.value = !darkMode.value
+}
 </script>
 
 <template>
-  <header class="bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800">
+  <header
+    :data-theme="darkMode ? 'dark' : 'light'"
+    class="bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800"
+  >
     <SearchInput
       @get-weather-data="getWeatherData"
       @search-weather-location="searchWeatherLocation"
       :location-search-results="locationSearchResults"
     />
   </header>
-  <main>
+  <main :data-theme="darkMode ? 'dark' : 'light'" class="bg-base-100">
     <CurrentWeatherCard
       :weather-data="weatherData"
       :temperature-unit-celsius="temperatureUnitCelsius"
@@ -135,9 +143,12 @@ function toggleTemperatureUnit() {
       :temperature-unit-celsius="temperatureUnitCelsius"
     /> 
   </main>
-  <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
+  <footer
+    :data-theme="darkMode ? 'dark' : 'light'"
+    class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200"
+  >
     <div class="w-11/12">
-      <ThemeToggle />
+      <ThemeToggle :dark-mode="darkMode" @toggle-theme="toggleTheme" />
       <UnitToggle
         :temperature-unit="temperatureUnitCelsius"
         @toggle-temperature-unit="toggleTemperatureUnit"
