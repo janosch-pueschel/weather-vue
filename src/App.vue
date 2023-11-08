@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
+import ThemeToggle from './components/ThemeToggle.vue'
 import UnitToggle from './components/UnitToggle.vue'
 import WeatherForecastTable from './components/WeatherForecastTable.vue'
 
@@ -136,6 +137,7 @@ function toggleTemperatureUnit() {
   </main>
   <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
     <div class="w-11/12">
+      <ThemeToggle />
       <UnitToggle
         :temperature-unit="temperatureUnitCelsius"
         @toggle-temperature-unit="toggleTemperatureUnit"

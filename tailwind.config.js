@@ -8,6 +8,14 @@ module.exports = {
       },
       borderWidth: {
         1: '1px'
+      },
+      spacing: {
+        5.5: '22px',
+        11.5: '46px'
+      },
+      content: {
+        lightModeIcon: 'url("/src/img/light-mode.svg")',
+        darkModeIcon: 'url("/src/img/dark-mode.svg")'
       }
     }
   },
