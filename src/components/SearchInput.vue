@@ -18,7 +18,7 @@ const showModal = ref(false)
 </script>
 
 <template>
-  <div>
+  <div class="bg-base-200">
     <div
       class="bg-base-300 bg-opacity-90 h-screen w-screen z-10 fixed"
       :class="{ block: showModal, hidden: !showModal }"

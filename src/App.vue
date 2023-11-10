@@ -122,37 +122,33 @@ function toggleTheme() {
 </script>
 
 <template>
-  <header
-    :data-theme="darkMode ? 'dark' : 'light'"
-    class="bg-gradient-to-br from-neutral-800 via-sky-900 to-neutral-800"
-  >
-    <SearchInput
-      @get-weather-data="getWeatherData"
-      @search-weather-location="searchWeatherLocation"
-      :location-search-results="locationSearchResults"
-    />
-  </header>
-  <main :data-theme="darkMode ? 'dark' : 'light'" class="bg-base-100">
-    <CurrentWeatherCard
-      :weather-data="weatherData"
-      :temperature-unit-celsius="temperatureUnitCelsius"
-      v-if="weatherData.location !== ''"
-    />
-    <WeatherForecastTable
-      :weather-forecast="weatherData.forecast"
-      :temperature-unit-celsius="temperatureUnitCelsius"
-    /> 
-  </main>
-  <footer
-    :data-theme="darkMode ? 'dark' : 'light'"
-    class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200"
-  >
-    <div class="w-11/12">
-      <ThemeToggle :dark-mode="darkMode" @toggle-theme="toggleTheme" />
-      <UnitToggle
-        :temperature-unit="temperatureUnitCelsius"
-        @toggle-temperature-unit="toggleTemperatureUnit"
+  <div :data-theme="darkMode ? 'dark' : 'light'">
+    <header>
+      <SearchInput
+        @get-weather-data="getWeatherData"
+        @search-weather-location="searchWeatherLocation"
+        :location-search-results="locationSearchResults"
       />
-    </div>
-  </footer>
+    </header>
+    <main class="bg-base-100 h-screen">
+      <CurrentWeatherCard
+        :weather-data="weatherData"
+        :temperature-unit-celsius="temperatureUnitCelsius"
+        v-if="weatherData.location !== ''"
+      />
+      <WeatherForecastTable
+        :weather-forecast="weatherData.forecast"
+        :temperature-unit-celsius="temperatureUnitCelsius"
+      /> 
+    </main>
+    <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">
+      <div class="w-11/12">
+        <ThemeToggle :dark-mode="darkMode" @toggle-theme="toggleTheme" />
+        <UnitToggle
+          :temperature-unit="temperatureUnitCelsius"
+          @toggle-temperature-unit="toggleTemperatureUnit"
+        />
+      </div>
+    </footer>
+  </div>
 </template>
