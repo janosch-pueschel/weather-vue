@@ -92,7 +92,7 @@ interface Location {
 }
 const locationSearchResults = ref<Location[]>([])
 
-function searchWeatherLocation(weatherLocation: string) {
+function searchWeatherLocation(weatherLocation?: string) {
   fetch(
     `http://api.weatherapi.com/v1/search.json?key=b3d01e05915d4c66b0f155101230508&q=${weatherLocation}`
   )
