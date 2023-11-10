@@ -130,7 +130,7 @@ function toggleTheme() {
         :location-search-results="locationSearchResults"
       />
     </header>
-    <main class="bg-base-100 h-screen">
+    <main class="h-screen">
       <CurrentWeatherCard
         :weather-data="weatherData"
         :temperature-unit-celsius="temperatureUnitCelsius"
@@ -139,6 +139,7 @@ function toggleTheme() {
       <WeatherForecastTable
         :weather-forecast="weatherData.forecast"
         :temperature-unit-celsius="temperatureUnitCelsius"
+        :dark-mode="darkMode"
       /> 
     </main>
     <footer class="w-full h-16 fixed flex justify-center items-center bottom-0 bg-base-200">

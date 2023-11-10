@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import WeatherBar from './WeatherBar.vue'
 
-defineProps(['weatherForecast', 'temperatureUnitCelsius'])
+defineProps(['weatherForecast', 'temperatureUnitCelsius', 'darkMode'])
 </script>
 
 <template>
   <section class="flex justify-center">
-    <div class="w-11/12 my-8 p-3 bg-white bg-opacity-10 rounded-lg">
+    <div
+      class="w-11/12 my-8 p-3 bg-opacity-10 rounded-lg"
+      :class="{ 'bg-black': !darkMode, 'bg-white': darkMode }"
+    >
       <div
         v-for="weather in weatherForecast"
         :key="weather.index"
