@@ -13,7 +13,8 @@ defineProps(['weatherForecast', 'temperatureUnitCelsius', 'darkMode'])
       <div
         v-for="weather in weatherForecast"
         :key="weather.index"
-        class="m-auto grid grid-cols-table gap-5 py-3 border-b-2 border-gray-700 last:border-0"
+        class="m-auto grid grid-cols-table gap-5 py-3 border-b-2 last:border-0"
+        :class="{ 'border-gray-300': !darkMode, 'border-gray-700': darkMode }"
       >
         <div class="flex items-center">
           <p>{{ weather.weekday }}</p>
