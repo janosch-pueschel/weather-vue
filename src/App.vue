@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
@@ -115,10 +115,15 @@ function toggleTemperatureUnit() {
   temperatureUnitCelsius.value = !temperatureUnitCelsius.value
 }
 
-const darkMode = ref(false)
+const initTheme = localStorage.getItem('darkMode')
+const darkMode = ref(initTheme ? JSON.parse(initTheme) : false)
 function toggleTheme() {
   darkMode.value = !darkMode.value
 }
+
+watch(darkMode, (darkMode) => {
+  localStorage.setItem('darkMode', JSON.stringify(darkMode))
+})
 </script>
 
 <template>
