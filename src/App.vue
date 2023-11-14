@@ -110,17 +110,20 @@ function searchWeatherLocation(weatherLocation?: string) {
     })
 }
 
-const temperatureUnitCelsius = ref(true)
+const initTemperatureUnit = localStorage.getItem('temperatureUnit')
+const temperatureUnitCelsius = ref(initTemperatureUnit ? JSON.parse(initTemperatureUnit) : true)
 function toggleTemperatureUnit() {
   temperatureUnitCelsius.value = !temperatureUnitCelsius.value
 }
+watch(temperatureUnitCelsius, (temperatureUnitCelsius) => {
+  localStorage.setItem('temperatureUnit', JSON.stringify(temperatureUnitCelsius))
+})
 
 const initTheme = localStorage.getItem('darkMode')
 const darkMode = ref(initTheme ? JSON.parse(initTheme) : false)
 function toggleTheme() {
   darkMode.value = !darkMode.value
 }
-
 watch(darkMode, (darkMode) => {
   localStorage.setItem('darkMode', JSON.stringify(darkMode))
 })
