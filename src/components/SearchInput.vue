@@ -30,10 +30,9 @@ const showModal = ref(false)
         class="w-11/12 join z-20"
         @submit.prevent.stop="
           () => {
+            showModal ? (showModal = !showModal) : ''
             $emit('getWeatherData', weatherLocation)
             clearWeatherLocation()
-            $emit('searchWeatherLocation')
-            showModal ? (showModal = !showModal) : ''
           }
         "
       >
@@ -68,10 +67,7 @@ const showModal = ref(false)
           </svg>
         </button>
       </form>
-      <div
-        class="absolute top-20 py-2 w-11/12 z-20"
-        :class="{ hidden: locationSearchResults.length === 0 }"
-      >
+      <div class="absolute top-20 py-2 w-11/12 z-20" :class="{ hidden: !showModal }">
         <ul>
           <li
             v-for="result in locationSearchResults"
