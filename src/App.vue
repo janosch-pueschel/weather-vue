@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 import CurrentWeatherCard from './components/CurrentWeatherCard.vue'
 import SearchInput from './components/SearchInput.vue'
@@ -32,6 +32,16 @@ const weatherData = ref({
   precip_mm: '',
   precip_in: '',
   forecast: <WeatherForecast[]>[]
+})
+
+onMounted(() => {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      getWeatherData(`${position.coords.latitude},${position.coords.longitude}`)
+    })
+  } else {
+    console.log('location not found')
+  }
 })
 
 function getWeatherData(weatherLocation: string) {
